@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<script tpye="javascript">
+</script>
+
+<head>
+    <title>Admin_ACMG</title>
+    <script type="text/javascript" src="{{url_for('static', filename='jslib/jquery-1.11.1.js')}}"></script>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <!-- <script>
+        function chanceID() {
+            var cls = document.getElementsByClassName("userID"); 
+            for (n=1, length = cls.length; n < length; n++) {
+                cls[n].id= "user" + (n + 1); 
+            }
+        }; 
+    chanceID() -->
+    <!-- </script> -->
+    <style>
+        body {
+            background-image: url(/static/background/index_bg.jpg);
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .nav-item {
+            border-right: 1px solid #a9a9ad;
+            margin-right: 15;
+            margin-left: 15;
+        }
+
+        .container {
+            margin-top: 50px;
+            padding-bottom: 2px;
+            background-color: rgba(62, 63, 65, 0.89);
+        }
+    </style>
+</head>
+
+<body style="">
+    <nav class=" navbar navbar-dark text-light" style="background-color: 	#30302c">
+        <div class=" container-fluid-nav " style="display: flex ;justify-content: space-around;">
+            <span class="text-white">
+                <h2>FYP Company</h2>
+            </span>
+        </div>
+    </nav>
+    <nav class="navbar navbar-expand-sm navbar-dark custom " style="background-color:rgba(78, 75, 75, 0.534);">
+        <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-dark navbar-toggler-icon "></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end " id="navbarNav">
+            <ul class="navbar-nav mr-auto" id="">
+                <li class="nav-item">
+                    <a href="/AHP" class="nav-link align-middle px-0 text-white">
+                        <i class="fa fa-home "></i> <span class="ms-1 d-none d-md-inline ">Home</span>
+                    </a>
+                </li>
+                <li class="nav-item dropdown" style="margin: right 15px ;">
+                    <a  href="" data-bs-toggle="dropdown" class="nav-link dropdown-triggle text-white "
+                    id="navbarDropdown3" role="button" aria-expanded="false">
+                        <i class="	fa fa-files-o "><span class="ms-1 d-none d-md-inline ">Account Management</span></i>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown3" style="background-color: #30302c8c;">
+                        <li class="w-100">
+                            <a href="/AMG_view" class="dropdown-item  text-white">
+                                <image src="{{url_for('static', filename='icon/group-modified.png')}}"
+                                    style="width: 16px; height: 16px;"></image><span class="d-none d-sm-inline">User
+                                    List</span>
+                            </a>
+                        </li>
+                        <li class="w-100">
+                            <a href="/Admin_insert" class="dropdown-item  text-white">
+                                <image src="{{url_for('static', filename='icon/add-photo-modified.png')}}"
+                                    style="width: 16px; height: 16px;"></image><span class="d-none d-sm-inline">Create
+                                    Accounts</span>
+                            </a>
+                        </li>
+                        <li class="w-100">
+                            <a href="/Admin_searchAccount" class="dropdown-item  text-white">
+                                <image src="{{url_for('static', filename='icon/add-photo-modified.png')}}"
+                                    style="width: 16px; height: 16px;"></image><span class="d-none d-sm-inline">Search
+                                    Accounts</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="" data-bs-toggle="dropdown" class="nav-link dropdown-triggle text-white "
+                        id="navbarDropdown2" role="button" aria-expanded="false">
+                        <span class="ms-1 d-none d-sm-inline">Scan Records
+                            Management</span></i>
+                    </a>
+                    <ul class="dropdown-menu bg-dark " aria-labelledby="navbarDropdown2" >
+                        <li class="w-100">
+                            <a href="/DBList" class="dropdown-item px-0 text-white">
+                                <image src="{{url_for('static', filename='icon/folder-modified.png')}}"
+                                    style="width: 16px; height: 16px;"></image><span class="d-none d-sm-inline">Scanning
+                                    History</span>
+                            </a>
+                        </li>
+                        <li class="w-100">
+                            <a href="/ReScan" class="dropdown-item px-0 text-white">
+                                <image src="{{url_for('static', filename='icon/scanning-modified.png')}}"
+                                    style="width: 16px; height: 16px;"></image><span class="d-none d-sm-inline">ReScan
+                                    Records</span>
+                            </a>
+                        </li>
+                        <li class="w-100">
+                            <a href="/Admin_searchRecord" class="dropdown-item px-0 text-white">
+                                <image src="{{url_for('static', filename='icon/folder-modified.png')}}"
+                                    style="width: 16px; height: 16px;"></image><span class="d-none d-sm-inline">Search
+                                    Previous Scanning Records</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="/ListProblem" class="nav-link align-middle text-white">
+                        <image src="{{url_for('static', filename='icon/folder-modified.png')}}"
+                            style="width: 16px; height: 16px;"></image><span class="ms-1 d-none d-md-inline ">User
+                            Problem List</span>
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="" data-bs-toggle="dropdown" class="nav-link dropdown-triggle text-white "
+                        id="navbarDropdown" role="button" aria-expanded="false">
+                        <i class="	fa fa-files-o "><span class="ms-1 d-none d-sm-inline">Place
+                                Management</span></i>
+                    </a>
+                    <ul class="dropdown-menu bg-dark " aria-labelledby="navbarDropdown">
+                        <li class="w-100">
+                            <a href="/shopList" class="dropdown-item  text-white">
+                                <image src="{{url_for('static', filename='icon/folder-modified.png')}}"
+                                    style="width: 16px; height: 16px;"></image><span class="d-none d-sm-inline">Shop
+                                    Location list</span>
+                            </a>
+                        </li>
+                        <li class="w-100">
+                            <a href="/add_place" class="dropdown-item  text-white">
+                                <image src="{{url_for('static', filename='icon/add-location-modified.png')}}"
+                                    style="width: 16px; height: 16px;"></image><span class="d-none d-sm-inline">Add
+                                    Place</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="/logout" class="nav-link  text-white">
+                        <i class="fa fa-sign-out "></i> <span class="ms-1 d-none d-md-inline ">Logout</span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+	  
+    <div class="container px-4 py-5 text-light" id="hanging-icons">
+        <h2 class="pb-2 border-bottom text-light">Scan Records List</h2>
+    
+    <div class="container-fluid">
+	    <form action="#" method="POST">
+    <table class="table table-bordered text-light">
+        <thead>
+        <tr>
+            <th>SPID</th>
+            <th>Problem</th>
+            <th>Image file</th>
+			<th>Rescan</th>
+            <th>User ID</th>
+            <th>CreateDate</th>
+            <th>Status</th>
+            <th>Staff ID</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in data %}
+                    <tr>
+                        <td>{{item[0]}}</td>
+                        <td>{{item[2]}}</td>
+                        <td><a href="/static/uploads/{{item[1]}}" download>{{item[1]}}</a></td>
+                        <td>{{item[3]}}</td>
+                        <td>{{item[4]}}</td>
+                        <td>{{item[5]}}</td>
+                        <td>{{item[6]}}</td>
+                        <td>{{item[7]}}</td>
+                        <td><button type="submit" name="SPID" value="{{item[0]}}" formaction="/SolveProblem">Completed</button></td>
+                        <td><button name="SPID" value="{{item[0]}}" formaction="/PrcessProblem">Process</button><input type="hidden" name="ID" value="{{item[4]}}"></td>
+                    </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </form>
+    </div>
+</div>
+</body>
+
+</html>

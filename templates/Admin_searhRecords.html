@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Label Scanner</title>
+    <script type="text/javascript" src="{{url_for('static', filename='jslib/jquery-1.11.1.js')}}"></script>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+    <script type="text/javascript" language="javascript">
+        $(function () {
+            $(".cert").change(function () {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#show').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        });
+        $(document).ready(function () {
+            $("#cancel").click(function () {
+                $('#show').attr('src', "http://100dayscss.com/codepen/upload.svg");
+                $("#file-upload").val("");
+            });
+        });
+        $(document).ready(function () {
+            $("#close").click(function () {
+                $("#blockmessage").css("display", "none");
+            });
+            $("#type").change(function(){
+			    var type = document.getElementById("type").value;
+			    if(type == "month"){
+			        document.getElementById("inputType").innerHTML = "<input type='month' name='input'/>";
+			    }else if(type == "id"){
+				    document.getElementById("inputType").innerHTML = "<input type='text' name='input'/>";
+				}else{
+                    document.getElementById("inputType").innerHTML = "<input type='date' name='input'/>";
+                }
+			  });
+        });
+    </script>
+    <style>
+        body {
+            background-image: url(/static/background/index_bg.jpg);
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .nav-item {
+            border-right: 1px solid #a9a9ad;
+            margin-right: 15;
+            margin-left: 15;
+        }
+
+        .container {
+            margin-top: 50px;
+            padding-bottom: 2px;
+            background-color: rgba(62, 63, 65, 0.89);
+        }
+    </style>
+</head>
+
+<body style="">
+    <nav class=" navbar navbar-dark text-light" style="background-color: 	#30302c">
+        <div class=" container-fluid-nav " style="display: flex ;justify-content: space-around;">
+            <span class="text-white">
+                <h2>FYP Company</h2>
+            </span>
+        </div>
+    </nav>
+    <nav class="navbar navbar-expand-sm navbar-dark custom " style="background-color:rgba(78, 75, 75, 0.534);">
+        <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-dark navbar-toggler-icon "></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end " id="navbarNav">
+            <ul class="navbar-nav mr-auto" id="">
+                <li class="nav-item">
+                    <a href="/AHP" class="nav-link align-middle px-0 text-white">
+                        <i class="fa fa-home "></i> <span class="ms-1 d-none d-md-inline ">Home</span>
+                    </a>
+                </li>
+                <li class="nav-item dropdown" style="margin: right 15px ;">
+                    <a  href="" data-bs-toggle="dropdown" class="nav-link dropdown-triggle text-white "
+                    id="navbarDropdown3" role="button" aria-expanded="false">
+                        <i class="	fa fa-files-o "><span class="ms-1 d-none d-md-inline ">Account Management</span></i>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown3" style="background-color: #30302c8c;">
+                        <li class="w-100">
+                            <a href="/AMG_view" class="dropdown-item  text-white">
+                                <image src="{{url_for('static', filename='icon/group-modified.png')}}"
+                                    style="width: 16px; height: 16px;"></image><span class="d-none d-sm-inline">User
+                                    List</span>
+                            </a>
+                        </li>
+                        <li class="w-100">
+                            <a href="/Admin_insert" class="dropdown-item  text-white">
+                                <image src="{{url_for('static', filename='icon/add-photo-modified.png')}}"
+                                    style="width: 16px; height: 16px;"></image><span class="d-none d-sm-inline">Create
+                                    Accounts</span>
+                            </a>
+                        </li>
+                        <li class="w-100">
+                            <a href="/Admin_searchAccount" class="dropdown-item  text-white">
+                                <image src="{{url_for('static', filename='icon/add-photo-modified.png')}}"
+                                    style="width: 16px; height: 16px;"></image><span class="d-none d-sm-inline">Search
+                                    Accounts</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="" data-bs-toggle="dropdown" class="nav-link dropdown-triggle text-white "
+                        id="navbarDropdown2" role="button" aria-expanded="false">
+                        <span class="ms-1 d-none d-sm-inline">Scan Records
+                            Management</span></i>
+                    </a>
+                    <ul class="dropdown-menu bg-dark " aria-labelledby="navbarDropdown2" >
+                        <li class="w-100">
+                            <a href="/DBList" class="dropdown-item px-0 text-white">
+                                <image src="{{url_for('static', filename='icon/folder-modified.png')}}"
+                                    style="width: 16px; height: 16px;"></image><span class="d-none d-sm-inline">Scanning
+                                    History</span>
+                            </a>
+                        </li>
+                        <li class="w-100">
+                            <a href="/ReScan" class="dropdown-item px-0 text-white">
+                                <image src="{{url_for('static', filename='icon/scanning-modified.png')}}"
+                                    style="width: 16px; height: 16px;"></image><span class="d-none d-sm-inline">ReScan
+                                    Records</span>
+                            </a>
+                        </li>
+                        <li class="w-100">
+                            <a href="/Admin_searchRecord" class="dropdown-item px-0 text-white">
+                                <image src="{{url_for('static', filename='icon/folder-modified.png')}}"
+                                    style="width: 16px; height: 16px;"></image><span class="d-none d-sm-inline">Search
+                                    Previous Scanning Records</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="/ListProblem" class="nav-link align-middle text-white">
+                        <image src="{{url_for('static', filename='icon/folder-modified.png')}}"
+                            style="width: 16px; height: 16px;"></image><span class="ms-1 d-none d-md-inline ">User
+                            Problem List</span>
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="" data-bs-toggle="dropdown" class="nav-link dropdown-triggle text-white "
+                        id="navbarDropdown" role="button" aria-expanded="false">
+                        <i class="	fa fa-files-o "><span class="ms-1 d-none d-sm-inline">Place
+                                Management</span></i>
+                    </a>
+                    <ul class="dropdown-menu bg-dark " aria-labelledby="navbarDropdown">
+                        <li class="w-100">
+                            <a href="/shopList" class="dropdown-item  text-white">
+                                <image src="{{url_for('static', filename='icon/folder-modified.png')}}"
+                                    style="width: 16px; height: 16px;"></image><span class="d-none d-sm-inline">Shop
+                                    Location list</span>
+                            </a>
+                        </li>
+                        <li class="w-100">
+                            <a href="/add_place" class="dropdown-item  text-white">
+                                <image src="{{url_for('static', filename='icon/add-location-modified.png')}}"
+                                    style="width: 16px; height: 16px;"></image><span class="d-none d-sm-inline">Add
+                                    Place</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="/logout" class="nav-link  text-white">
+                        <i class="fa fa-sign-out "></i> <span class="ms-1 d-none d-md-inline ">Logout</span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+    
+    <div class="container px-4 py-5 text-light" id="hanging-icons">
+        <h2 class="pb-2 border-bottom text-light">User Review List</h2>
+		
+    
+    <div class="container-fluid">
+	    <div id="search"><form action="/Admin_searchRecord" method="POST">
+            <table border="0">
+                <tr><td><select name="type" id="type">
+                <option value="month">Searching by month</option><option value="date">Searching by date</option><option value="id">Searching by Account ID</option>
+               </select></td><td id="inputType"><input type="month" name="input"></td><td><button type="submit">Search</button></td></tr>
+            </table>
+        </form></div>
+		<div id="action" style="display: none;">{{action}}</div>
+		<div id="msg">{{message}}</div>
+        <div id="pType" style="display: none;">{{type}}</div>
+		<div id="pValue" style="display: none;">{{value}}</div>
+        <form action="/AdmindelRecord" method="POST" id="records">
+            <table class="table table-bordered text-light">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Calories</th>
+                        <th>Total Fat</th>
+                        <th>Sodium</th>
+                        <th>Total Carbohydrate</th>
+                        <th>Protein</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in data %}
+                    <tr>
+                        <input type="hidden" name="IID" value="{{item[1]}}">
+                        <td><a href="/image" class="img" value="{{item[0]}}">{{item[0]}}</a></td>
+                        <td>{{item[2]}}</td>
+                        <td>{{item[3]}}</td>
+                        <td>{{item[4]}}</td>
+                        <td>{{item[5]}}</td>
+                        <td>{{item[6]}}</td>
+                        <td><button type="submit" name="user_id" value="{{item[0]}}" onclick="showMessage()">remove</button></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+<script>
+    $(document).ready(function(){
+	    $("#msg").hide();
+		$("#records").hide();
+		var action = document.getElementById("action").innerHTML;
+		var t = document.getElementById("pType").innerHTML;
+		var v = document.getElementById("pValue").innerHTML;
+        var msg = document.getElementById("msg").innerHTML;
+		
+		if(action == "show"){
+			if(msg==""){
+                $("#msg").hide();
+				$("#records").show();
+				document.getElementById("type").value = t;
+				if(document.getElementById("type").value =="date"){
+					document.getElementById("inputType").innerHTML = "<input type='date' name='input' value='"+v+"'/>";
+			    }else if(document.getElementById("type").value =="id"){
+                    document.getElementById("inputType").innerHTML = "<input type='text' name='input' value='"+v+"'/>";
+                }else{
+				    document.getElementById("inputType").innerHTML = "<input type='month' name='input' value='"+v+"'/>";
+				}
+			}else{
+				document.getElementById("type").value = t;
+				if(document.getElementById("type").value =="date"){
+			        document.getElementById("inputType").innerHTML = "<input type='date' name='input' value='"+v+"'/>";
+			    }else if(document.getElementById("type").value =="id"){
+                    document.getElementById("inputType").innerHTML = "<input type='text' name='input' value='"+v+"'/>";
+                }else{
+					document.getElementById("inputType").innerHTML = "<input type='month' name='input' value='"+v+"'/>";
+				}
+				$("#records").hide();
+				$("#msg").show();
+			}
+		}
+
+		$('.img').click(function () {
+			alert('Waiting for the processing!');
+			var text = $(this).attr("value");
+			text = '/static/uploads/' + text;
+			localStorage.setItem('src', text);
+		});
+	});
+    function showMessage(){
+        alert("The Selected record have been deleted!");
+    }
+</script>
+</html>

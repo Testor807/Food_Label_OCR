@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Label Scanner</title>
+    <script type="text/javascript" src="{{url_for('static', filename='jslib/jquery-1.11.1.js')}}"></script>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+    <script type="text/javascript" language="javascript">
+        $(function () {
+            $(".cert").change(function () {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#show').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        });
+        $(document).ready(function() {
+            $("#cancel").click(function(){
+                $('#show').attr('src', "http://100dayscss.com/codepen/upload.svg");
+                $("#file-upload").val("");
+            });
+        });
+        $(document).ready(function () {
+            $("#close").click(function () {
+                $("#blockmessage").css("display", "none");
+            });
+        });
+    </script>
+    <style>
+        body {
+            background-image: url(/static/background/bg3.jpg);
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        .nav-item {
+            border-right: 1px solid #a9a9ad;
+            margin-right: 15;
+            margin-left: 15;
+        }
+        .custom{
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark ">
+
+        <a class="navbar-brand h1 mb-0  text-white" href="/premium_scan">
+            <h2>Nutrition Scanner</h2>
+        </a>
+    </nav>
+    <nav class="navbar navbar-expand-sm navbar-dark custom " style="background-color:rgba(78, 75, 75, 0.534);">
+        <button type="button" data-toggle="collapse" data-taget="#navbarNav" class="navbar-toggler"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end mt-1" id="navbarNav">
+
+            <ul class="navbar-nav mr-auto"id="">
+
+                <li class="nav-item">
+                    <a href="/premium_scan" class="nav-link align-middle text-white active">
+                        <i class="fa fa-home "></i> <span class="ms-1 d-none d-md-inline ">Scan</span>
+                    </a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-triggle text-white " id="navbarDropdown"role="button" aria-expanded="false">
+                        <i class="	fa fa-files-o "><span class="ms-1 d-none d-sm-inline">Account
+                                Management</span></i>
+                    </a>
+                    <ul class="dropdown-menu bg-dark " aria-labelledby="navbarDropdown">
+                        <li class="w-100">
+                            <a href="/edit" class="dropdown-item text-white">
+                                <image src="{{url_for('static', filename='icon/folder-modified.png')}}"
+                                    style="width: 16px; height: 16px;"></image><span class="d-none d-sm-inline">Account
+                                    Information</span></i>
+                            </a>
+                        </li>
+                        <li class="w-100">
+                            <a href="#" class="dropdown-item text-white" onclick="showMessage()">
+                                <image src="{{url_for('static', filename='icon/block-user-modified.png')}}"
+                                    style="width: 16px; height: 16px;"></image><span class="d-none d-sm-inline">Delete
+                                    Account</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-triggle text-white" id="navbarDropdown2" role="button"aria-expanded="false">
+                        <i class="	fa fa-files-o "><span class="ms-1 d-none d-sm-inline">Previous Scanned Records
+                                Management</span></i>
+                    </a>
+                    <ul class="dropdown-menu bg-dark "  aria-labelledby="navbarDropdown2">
+                        <li class="">
+                            <a href="/review" class="dropdown-item  text-white">
+                                <image src="{{url_for('static', filename='icon/folder-modified.png')}}"
+                                    style="width: 16px; height: 16px;"></image><span class="d-none d-sm-inline">Check
+                                    Past Records</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="/searchRecord" class="dropdown-item   text-white">
+                                <image src="{{url_for('static', filename='icon/folder-modified.png')}}"
+                                    style="width: 16px; height: 16px;"></image><span id="delR"
+                                    class="d-none d-sm-inline">Search Previous Scanned Records</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="/suggestion" class="dropdown-item  text-white">
+                                <image src="{{url_for('static', filename='icon/report-modified.png')}}"
+                                    style="width: 16px; height: 16px;"></image><span class="d-none d-sm-inline">Generate
+                                    Eating habits Suggestion</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="/exercise" class="nav-link text-white">
+                        <image src="{{url_for('static', filename='icon/sports-modified.png')}}"
+                            style="width: 16px; height: 16px;"></image><span class="d-none d-sm-inline">Records
+                            Exercise</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/map_p" class="nav-link align-middle  text-white">
+                        <i class="fa fa-usd "></i> <span class="ms-1 d-none d-md-inline ">Healthy shopping</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/responeProblem" class="nav-link align-middle  text-white">
+                        <image src="{{url_for('static', filename='icon/writing-mody.png')}}"
+                            style="width: 16px; height: 16px;"></image><span class="ms-1 d-none d-md-inline ">Response
+                            Scanning problem</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/logout" class="nav-link align-middle  text-white">
+                        <i class="fa fa-sign-out "></i> <span class="ms-1 d-none d-md-inline ">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+	
+    <div class="collapse" id="navbarToggleExternalContent">
+        <div class="container-fluid" style="position: absolute;">
+            <div class="row flex-nowrap">
+                <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+                    <div
+                        class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                        <a class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                            <span class="fs-5 d-none d-sm-inline">Menu</span>
+                        </a>
+                        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+                            id="menu">
+                            <li class="nav-item">
+                                <a href="/premium_scan" class="nav-link align-middle px-0 text-white">
+                                    <i class="fa fa-home "></i> <span class="ms-1 d-none d-md-inline ">Scan</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#submenu1" data-bs-toggle="collapse"
+                                    class="nav-link px-0 align-middle text-white">
+                                    <i class="	fa fa-files-o "><span class="ms-1 d-none d-sm-inline">Account
+                                            Management</span></i>
+                                </a>
+                                <ul class="collapse show nav flex-column ms-1 " id="submenu1" data-bs-parent="#menu">
+                                    <li class="w-100">
+                                        <a href="/edit" class="nav-link px-0 text-white"><image src="{{url_for('static', filename='icon/folder-modified.png')}}" style="width: 16px; height: 16px;"></image><span
+                                                class="d-none d-sm-inline">Account Information</span></i></a>
+                                    </li>
+                                    <li class="w-100">
+                                        <a href="#" class="nav-link px-0 text-white" onclick="showMessage()"><image src="{{url_for('static', filename='icon/block-user-modified.png')}}" style="width: 16px; height: 16px;"></image><span
+                                                class="d-none d-sm-inline">Delete Account</span> </a>
+                                    </li>
+                                </ul>
+                                    </li>
+                                <li>
+                                        <a href="#submenu1" data-bs-toggle="collapse"
+                                            class="nav-link px-0 align-middle text-white">
+                                            <i class="	fa fa-files-o "><span class="ms-1 d-none d-sm-inline">Previous Scanned Records Management</span></i>
+                                        </a>
+                                        <ul class="collapse show nav flex-column ms-1 " id="submenu1" data-bs-parent="#menu">
+                                            <li class="w-100">
+                                                <a href="/review" class="nav-link px-0 text-white"><image src="{{url_for('static', filename='icon/folder-modified.png')}}" style="width: 16px; height: 16px;"></image><span
+                                                        class="d-none d-sm-inline">Check Past Records</span> </a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="/searchRecord" class="nav-link px-0 text-white"><image src="{{url_for('static', filename='icon/folder-modified.png')}}" style="width: 16px; height: 16px;"></image><span id="delR"
+                                                        class="d-none d-sm-inline">Search Previous Scanned Records</span> </a>
+                                            </li>
+                                            <li class="w-100">
+                                                <a href="/suggestion" class="nav-link px-0 text-white"><image src="{{url_for('static', filename='icon/report-modified.png')}}" style="width: 16px; height: 16px;"></image><span
+                                                        class="d-none d-sm-inline">Generate Eating habits Suggestion</span> </a>
+                                            </li>
+                                        </ul>
+                                </li>
+							<li>
+                                        <a href="/exercise" class="nav-link px-0 text-white"><image src="{{url_for('static', filename='icon/sports-modified.png')}}" style="width: 16px; height: 16px;"></image><span
+                                                class="d-none d-sm-inline">Records Exercise</span> </a>
+                                    </li>
+							<li class="nav-item">
+                                        <a href="/map_p" class="nav-link align-middle px-0 text-white">
+                                            <i class="fa fa-usd "></i> <span class="ms-1 d-none d-md-inline ">Healthy shopping</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/responeProblem" class="nav-link align-middle px-0 text-white">
+                                            <image src="{{url_for('static', filename='icon/writing-mody.png')}}" style="width: 16px; height: 16px;"></image><span class="ms-1 d-none d-md-inline ">Response Scanning problem</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/logout" class="nav-link align-middle px-0 text-white">
+                                            <i class="fa fa-sign-out "></i> <span
+                                                class="ms-1 d-none d-md-inline ">Logout</span>
+                                        </a>
+                                    </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container  w-500"style="width: 500px; margin-top:30px">
+        <div class="card mt-2 h-480 w-400 text-center" >
+            <div class="card-header" style="width: 100%;height: 50px;border-bottom: 1px solid #999;text-align: center;">
+                <h1 style="font-size: 30px;font-weight: 300;color: #666;">Today Exercise's Amount</h1>
+            </div>
+            
+            <div class="card-body m-auto" style="width: 400px;height: 300px;text-align: center;">
+                <form method="post" action="/exercise" enctype="multipart/form-data">
+                    <div class="container" style="margin-bottom: 10px;">
+					    <table class="table "border="0">
+                        <tr><td><label>Action Date:</label></td><td><input type="date" name="date" />
+						<tr><td><label>Exercise Type:</label></td><td><input list="sport" name="exercise" />
+						<datalist id="sport">
+						    <option value="Cardio(high impact)">Cardio(high impact)</option>
+							<option value="Cardio(low impact)">Cardio(low impact)</option>
+							<option value="badminton">badminton</option>
+							<option value="football">football</option>
+							<option value="Tennis(single)">Tennis (single)</option>
+							<option value="boxing">boxing</option>
+							<option value="Cycling">Cycling</option>
+							<option value="Running">Running</option>
+							<option value="Judo/Karate/Taekwondo">Judo/Karate/Taekwondo</option>
+							<option value="swimming">swimming</option>
+							<option value="weight training">weight training</option>
+						</datalist></td></tr>
+						<tr><td><label>Duration:</label></td><td style="text-align:left;"><input type="text" name="duration" style="width: 70px; float: left;"/>min</td></tr>
+						<tr><td><input class="btn btn-primary"type="submit" value="submit"></td><td><input class="btn btn-danger"type="reset" value="reset"></td></tr>
+                    </table>			
+				    </div>
+                </form>
+            </div>
+		</div>
+    </div>
+    <div id="hide" style="display:none">{{message}}</div>
+    <div id="run" style="display:none">{{run}}</div>
+    
+    <script>
+        var r = document.getElementById("run").innerText;
+        var str = document.getElementById("hide").innerText;
+        if(r == "run"){
+            alert(str);
+        }
+    </script>
+	<script >
+		function showMessage(){
+		    var proceed = confirm("Do you delete this account?");
+            if (proceed) {
+              location.href = "/delAccount";
+            } else {
+                //don't proceed
+            }
+		}
+    </script>
+</body>
+
+</html>

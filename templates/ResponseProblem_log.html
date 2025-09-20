@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Label Scanner</title>
+    <script type="text/javascript" src="{{url_for('static', filename='jslib/jquery-1.11.1.js')}}"></script>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+    <script type="text/javascript" language="javascript">
+        $(function () {
+            $(".cert").change(function () {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#show').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        });
+        $(document).ready(function() {
+            $("#cancel").click(function(){
+                $('#show').attr('src', "http://100dayscss.com/codepen/upload.svg");
+                $("#file-upload").val("");
+            });
+        });
+        $(document).ready(function () {
+            $("#close").click(function () {
+                $("#blockmessage").css("display", "none");
+            });
+        });
+    </script>
+    <style>
+        body {
+            background-image: url(/static/background/index_BG.jpg);
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .nav-item {
+            border-right: 1px solid #a9a9ad;
+        }
+
+        .card {
+            margin-top: 5rem;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50rem;
+            height: 600px;
+            text-align: center;
+
+            border-radius: 1rem;
+            border: 1px transparent;
+            backdrop-filter: blur(1rem);
+            box-shadow: 1.3rem 1.3rem 1.3rem rgba(0, 0, 0, 0.5);
+
+            border-top-color: rgba(225, 225, 225, 0.5);
+            border-left-color: rgba(225, 225, 225, 0.5);
+            text-align: center;
+
+            background-color: rgba(255, 255, 255, 0.815);
+        }
+    </style>
+</head>
+
+<body >
+
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark ">
+
+        <a class="navbar-brand h1 mb-0  text-white" href="/premium_scan">
+            <h2>Nutrition Scanner</h2>
+        </a>
+    </nav>
+    <nav class="navbar navbar-expand-sm navbar-dark custom " style="background-color:rgba(78, 75, 75, 0.534);">
+        <button type="button" data-toggle="collapse" data-taget="#navbarNav" class="navbar-toggler"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end mt-1" id="navbarNav">
+
+            <ul class="navbar-nav mr-auto" id="">
+
+                <li class="nav-item">
+                    <a href="/premium_scan" class="nav-link align-middle text-white active">
+                        <i class="fa fa-home "></i> <span class="ms-1 d-none d-md-inline ">Scan</span>
+                    </a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-triggle text-white "
+                        id="navbarDropdown" role="button" aria-expanded="false">
+                        <i class="	fa fa-files-o "><span class="ms-1 d-none d-sm-inline">Account
+                                Management</span></i>
+                    </a>
+                    <ul class="dropdown-menu bg-dark " aria-labelledby="navbarDropdown">
+                        <li class="w-100">
+                            <a href="/edit" class="dropdown-item text-white">
+                                <image src="{{url_for('static', filename='icon/folder-modified.png')}}"
+                                    style="width: 16px; height: 16px;"></image><span class="d-none d-sm-inline">Account
+                                    Information</span></i>
+                            </a>
+                        </li>
+                        <li class="w-100">
+                            <a href="#" class="dropdown-item text-white" onclick="showMessage()">
+                                <image src="{{url_for('static', filename='icon/block-user-modified.png')}}"
+                                    style="width: 16px; height: 16px;"></image><span class="d-none d-sm-inline">Delete
+                                    Account</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-triggle text-white"
+                        id="navbarDropdown2" role="button" aria-expanded="false">
+                        <i class="	fa fa-files-o "><span class="ms-1 d-none d-sm-inline">Previous Scanned Records
+                                Management</span></i>
+                    </a>
+                    <ul class="dropdown-menu bg-dark " aria-labelledby="navbarDropdown2">
+                        <li class="">
+                            <a href="/review" class="dropdown-item  text-white">
+                                <image src="{{url_for('static', filename='icon/folder-modified.png')}}"
+                                    style="width: 16px; height: 16px;"></image><span class="d-none d-sm-inline">Check
+                                    Past Records</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="/searchRecord" class="dropdown-item   text-white">
+                                <image src="{{url_for('static', filename='icon/folder-modified.png')}}"
+                                    style="width: 16px; height: 16px;"></image><span id="delR"
+                                    class="d-none d-sm-inline">Search Previous Scanned Records</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="/suggestion" class="dropdown-item  text-white">
+                                <image src="{{url_for('static', filename='icon/report-modified.png')}}"
+                                    style="width: 16px; height: 16px;"></image><span class="d-none d-sm-inline">Generate
+                                    Eating habits Suggestion</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="/exercise" class="nav-link text-white">
+                        <image src="{{url_for('static', filename='icon/sports-modified.png')}}"
+                            style="width: 16px; height: 16px;"></image><span class="d-none d-sm-inline">Records
+                            Exercise</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/map_p" class="nav-link align-middle  text-white">
+                        <i class="fa fa-usd "></i> <span class="ms-1 d-none d-md-inline ">Healthy shopping</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/responeProblem" class="nav-link align-middle  text-white">
+                        <image src="{{url_for('static', filename='icon/writing-mody.png')}}"
+                            style="width: 16px; height: 16px;"></image><span class="ms-1 d-none d-md-inline ">Response
+                            Scanning problem</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/logout" class="nav-link align-middle  text-white">
+                        <i class="fa fa-sign-out "></i> <span class="ms-1 d-none d-md-inline ">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="card"  >
+        <div class="container" style="">
+            <div class="title" style="width: 100%;height: 50px;border-bottom: 1px solid #999;text-align: center;">
+                <h1 style="font-size: 30px;font-weight: 300;color: #666;">Response Scanning Problem</h1>
+            </div>
+            
+            <div class="container2 zone" style="width: 400px;height:400px;text-align: center;">
+                <form method="post" action="/responeProblem" enctype="multipart/form-data">
+                    <div class="container align-content-center" style="margin-bottom: 10px;">
+                            <table border="0">
+                                <tr><td colspan="2" style="text-align: left;"><b>Brief-description Problem: </b></td></td></tr>
+                                <tr><td colspan="2"><textarea name="problem" rows="4" cols="40" placeholder="simplely biref the problem information..." required></textarea></td></tr>
+                                <tr style="text-align: left;"><td >Need to ReScaning: </td><td><select name="scan">
+                                    <option value="no">No</option>
+                                    <option value="yes">Yes</option>
+                                </select></td></tr>
+                                <tr><td colspan="2"><div class="d-inline-block">
+                                    <input type="submit" class="btn btn-primary btn-sm" id="submit" value="Upload file"
+                                        style="display: block;width: 140px;height: 40px;background: rgb(85, 123, 207);color: #fff;border-radius: 3px;border: 0;box-shadow: 0 3px 0 0 rgb(226,135,67);transition: all 0.3s ease-in-out;font-size: 14px;"/>
+                                </div>
+                                <div class="d-inline-block">
+                                    <button id="cancel" class="btn btn-danger btn-sm" type="button" style="display: block;padding-left:10px;margin-left: 40px;width: 140px;height: 40px;background: rgb(231, 65, 65);color: #fff;border-radius: 3px;border: 0;box-shadow: 0 3px 0 0 rgb(120, 92, 247);transition: all 0.3s ease-in-out;font-size: 14px;">Cancel</button>
+                                </div></td></tr>
+                            </table>
+                    </div>
+                    <input type="file" name="image" id="file-upload" class="cert" required/>
+                    <img id="show" src="http://100dayscss.com/codepen/upload.svg" alt="" style="background: #ddd;width: 100%;height: 100%; display: block;" />
+                    
+            </div>
+            </form>
+        </div>
+    </div>
+	<div id="form"></div>
+	<script >
+        document.getElementById("backbtn").onclick = function () {
+            location.href = "/premium_scan";
+        };
+		function showMessage(){
+		    var proceed = confirm("Do you delete this account?");
+            if (proceed) {
+              location.href = "/delAccount";
+			alert("T");
+            } else {
+                //don't proceed
+            }
+		}
+    </script>
+</body>
+
+</html>
